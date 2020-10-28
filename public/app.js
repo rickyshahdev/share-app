@@ -80,7 +80,7 @@ class App extends React.Component {
             {
                 img:this.state.updateImg,
                 festival:this.state.updateFestival,
-                // date:this.state.updateDate,
+                date:this.state.updateDate,
                 name:this.state.updateName,
                 gift:this.state.updateGift,
             }
@@ -90,7 +90,7 @@ class App extends React.Component {
                     occasion:response.data,
                     img: '',
                     festival:'',
-                    // date:'',
+                    date:'',
                     name:'',
                     gift:''
                 })
@@ -136,39 +136,72 @@ class App extends React.Component {
     }
 
     render = () => {
-        return <div>
+        return <div className="container">
+
             <h2>Create Person</h2>
-            <form onSubmit={this.createFestival}>
-                <input onChange={this.changeNewImg} type="text" placeholder="Image link" /><br/>
-                <input onChange={this.changeNewFestival} type="text" placeholder="festival" /><br/>
-                <input onChange={this.changeNewDate} type="date"  /><br/>
-                <input onChange={this.changeNewName} type="text" placeholder="name" /><br/>
-                <input onChange={this.changeNewGift} type="text" placeholder="gift" /><br/>
-                <input type="submit" value="Create Festival" />
-            </form>
+
+<button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Create festival
+</button>
+
+
+<div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalLabel">Create Festivals</h5>
+        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div className="modal-body">
+      <form onSubmit={this.createFestival}>
+      <div className="form-group">
+      <label htmlFor="image">Image</label>
+          <input onChange={this.changeNewImg} required="true" type="text" placeholder="Image link" className="form-control"id="image"/>
+      <label htmlFor="festival">Festival</label>
+          <input onChange={this.changeNewFestival} required="true"type="text" placeholder="festival"className="form-control"id="festival"/>
+      <label htmlFor="festival">Date</label>
+          <input onChange={this.changeNewDate} type="date"className="form-control"id="date"  />
+      <label htmlFor="name">Name</label>
+          <input onChange={this.changeNewName} type="text" placeholder="name"className="form-control"id="name" />
+            <label htmlFor="gift">Gift</label>
+          <input onChange={this.changeNewGift} type="text" placeholder="gift" className="form-control"id="gift"/><br/>
+          <input className="btn btn-primary"type="submit" value="Create Festival" />
+          </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
             <h2>List of Festival</h2>
     <ul>
         {
             this.state.occasion.map(
-                (family, index) => {
+                (celebrate, index) => {
                     return <li key={index}>
 
-                      <img src={family.img} alt=""/>  : {family.festival}<br/>
-                      {family.date}<br/>
-                      {family.name}{family.gift}
+                      <img src={celebrate.img} alt=""/>  : {celebrate.festival}<br/>
+                      {celebrate.date}<br/>
+                      {celebrate.name}{celebrate.gift}
 
-                        <button value={family.id} onClick={this.deleteFestival}>DELETE</button>
+                        <button value={celebrate.id} onClick={this.deleteFestival}>DELETE</button>
 
-                        <form id={family.id} onSubmit={this.updatePerson}>
-                            <input onChange={this.changeUpdatePersonName} type="text" placeholder="name"/><br/>
-                            <input onChange={this.changeUpdatePersonAge} type="number" placeholder="age"/><br/>
-                            <input type="submit" value="Update Person"/>
+                        <form id={celebrate.id} onSubmit={this.updateFestival}>
+                            <input onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
+                            <input onChange={this.changeUpdateFestival} type="text" placeholder="name"/><br/>
+                            <input onChange={this.changeUpdateDate} type="date" /><br/>
+                            <input onChange={this.changeUpdateName} type="text" placeholder="person name"/><br/>
+                            <input onChange={this.changeUpdateGift} type="text" placeholder="gift"/><br/>
+                            <input type="submit" value="Update Event"/>
                         </form>
                     </li>
                 }
             )
         }
     </ul>
+
         </div>
     }
 }

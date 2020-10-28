@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const postgres = require('../postgres.js');
 
+
 router.get('/', (req, res) => {
     postgres.query('SELECT * FROM festival ORDER BY id ASC;', (err, results) => {
         res.json(results.rows)

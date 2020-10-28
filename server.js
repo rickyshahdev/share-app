@@ -5,6 +5,9 @@ const postgres = require('./postgres.js');
 app.use(express.json());
 app.use(express.static('public'))
 
+
+
+
 const peopleController = require('./controllers/festival.js');
 app.use('/festival', peopleController);
 
