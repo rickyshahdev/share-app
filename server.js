@@ -8,8 +8,8 @@ app.use(express.static('public'))
 
 
 
-const peopleController = require('./controllers/festival.js');
-app.use('/blog', peopleController);
+const postController = require('./controllers/blog.js');
+app.use('/blog', postController);
 
 postgres.connect();
 
