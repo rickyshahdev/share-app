@@ -136,7 +136,7 @@ class App extends React.Component {
     }
 
     render = () => {
-        return <div className="container">
+        return <div className="container-fluid">
 
             <h2>Create Person</h2>
 
