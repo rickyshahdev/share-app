@@ -14,7 +14,7 @@ class App extends React.Component {
     }
 
     createPost = (event) => {
-      console.log(this.state);
+
         event.preventDefault();
         axios.post(
             '/blog',
@@ -38,7 +38,7 @@ class App extends React.Component {
             newImg:event.target.value
         });
     }
-    changeNewFestival = (event) => {
+    changeNewTitle = (event) => {
         this.setState({
             newTitle:event.target.value
         });
@@ -123,54 +123,61 @@ class App extends React.Component {
 
     render = () => {
         return <div className="container">
-            <form onSubmit={this.createPost}>
-            <div className="row">
-             <div className="col-8">
-             <label htmlFor="festival">Description</label>
-                 <input onChange={this.changeNewTitle}  type="text" className="form-control"id="festival"/>
-                 </div>
-                <div className="col-3">
-                <label htmlFor="image">Image</label>
-                    <input onChange={this.changeNewImg} type="text" placeholder="Image link" className="form-control"id="image"/>
-                </div>
-                </div>
-                <div className="row">
-                  <div className="col-4">
-                <input onChange={this.changeNewDate} type="date"id="date"  />
-                   </div>
-                   <div className="col-4">
-            <label htmlFor="name">likes</label>
-                <input onChange={this.changeNewLikes} type="number" placeholder="likes"id="name" />
-                 </div>
-                <input className="btn btn-primary"type="submit" value="Add Post" />
-                </div>
+            <form className="form-group"onSubmit={this.createPost}>
+            <textarea onChange={this.changeNewTitle}  type="text" className="form-control" placeholder="What's up??"/>
+            <label htmlFor="image"></label>
+            <input onChange={this.changeNewImg} type="text" placeholder="Image link" className="form-control"id="image"/><br/>
+            <input onChange={this.changeNewDate}type="date"/>
+            <input onChange={this.changeNewLikes}type="number" min='0'/>
+            <input className="btn btn-primary btn-lg btn-block"type="submit" value="Add Post" id="button"/>
             </form>
 
-            <h2>List of Festival</h2>
-    <ul>
+    <div className="row">
         {
             this.state.blog.map(
                 (post, index) => {
-                    return <li key={index}>
-
-                      <img src={post.img} alt=""/>  : {post.titles}<br/>
+                    return <div className="col-8" key={index}>
+                      <p>{post.title}</p>
+                      <img className="d-flex justify-content-center"src={post.img} alt="" height="400" width="600"/>  : {post.titles}<br/>
                       {post.date}<br/>
-                      {post.likes}
+                      <button type="button" className="btn btn-primary"onChange={this.changeNewLikes}>like</button>
 
-                        <button value={post.id} onClick={this.deleteFestival}>DELETE</button>
 
-                        <form id={post.id} onSubmit={this.updateFestival}>
-                            <input onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
-                            <input onChange={this.changeUpdateTitles} type="text" placeholder="name"/><br/>
-                            <input onChange={this.changeUpdateDate} type="date" /><br/>
-                            <input onChange={this.changeUpdateLikes} type="number" placeholder="person name"/><br/>
-                            <input type="submit" value="Update Post"/>
-                        </form>
-                    </li>
+        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+         Edit
+        </button>
+        <div className="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div className="modal-body">
+              <form className="form-group"id={post.id} onSubmit={this.updateFestival}>
+                  <input onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
+                  <input onChange={this.changeUpdateTitles} type="text" placeholder="name"/><br/>
+                  <input onChange={this.changeUpdateDate} type="date" /><br/>
+                  <input onChange={this.changeUpdateLikes} type="number" placeholder="likes"/><br/>
+                  <input type="submit" value="Update Post"/>
+              </form>
+                  <button value={post.id} onClick={this.deletePost}>DELETE</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+
+                    </div>
                 }
             )
         }
-    </ul>
+    </div>
 
         </div>
     }
