@@ -1,34 +1,33 @@
 class App extends React.Component {
     state = {
-        occasion:[]
+        blog:[]
     }
 
     componentDidMount = () => {
-        axios.get('/festival').then(
+        axios.get('/blog').then(
             (response) => {
                 this.setState({
-                    occasion:response.data
+                    blog:response.data
                 })
             }
         )
     }
 
-    createFestival = (event) => {
+    createPost = (event) => {
       console.log(this.state);
         event.preventDefault();
         axios.post(
-            '/festival',
+            '/blog',
             {
                 img:this.state.newImg,
-                festival:this.state.newFestival,
+                title:this.state.newTitle,
                 date:this.state.newDate,
-                name:this.state.newName,
-                gift:this.state.newGift
+                likes:this.state.newLikes
             }
         ).then(
             (response) => {
                 this.setState({
-                  occasion:response.data
+                  blog:response.data
                 })
             }
         )
@@ -41,7 +40,7 @@ class App extends React.Component {
     }
     changeNewFestival = (event) => {
         this.setState({
-            newFestival:event.target.value
+            newTitle:event.target.value
         });
     }
     changeNewDate = (event) => {
@@ -50,49 +49,42 @@ class App extends React.Component {
         });
     }
 
-    changeNewName = (event) => {
+    changeNewLikes = (event) => {
         this.setState({
-            newName:event.target.value
-        });
-    }
-    changeNewGift = (event) => {
-        this.setState({
-            newGift:event.target.value
+            newLikes:event.target.value
         });
     }
 
-    deleteFestival = (event) => {
-        axios.delete('/festival/' + event.target.value).then(
+    deletePost = (event) => {
+        axios.delete('/blog/' + event.target.value).then(
             (response) => {
                 this.setState({
-                    occasion:response.data
+                    blog:response.data
                 })
             }
         )
 
     }
 
-    updateFestival = (event) => {
+    updatePost = (event) => {
         event.preventDefault();
         const id = event.target.getAttribute('id');
         axios.put(
-            '/festival/' + id,
+            '/blog/' + id,
             {
                 img:this.state.updateImg,
-                festival:this.state.updateFestival,
+                title:this.state.updateTitle,
                 date:this.state.updateDate,
-                name:this.state.updateName,
-                gift:this.state.updateGift,
+                likes:this.state.updateLikes
             }
         ).then(
             (response) => {
                 this.setState({
-                    occasion:response.data,
+                    blog:response.data,
                     img: '',
-                    festival:'',
+                    title:'',
                     date:'',
-                    name:'',
-                    gift:''
+                    likes:''
                 })
             }
         )
@@ -106,10 +98,10 @@ class App extends React.Component {
         )
     }
 
-    changeUpdateFestival = (event) => {
+    changeUpdatePost = (event) => {
         this.setState(
             {
-                updateFestival:event.target.value
+                updatePost:event.target.value
             }
         )
     }
@@ -120,81 +112,59 @@ class App extends React.Component {
             }
         )
     }
-    changeUpdateName= (event) => {
+    changeUpdateLikes= (event) => {
         this.setState(
             {
-                updateName:event.target.value
+                updateLikes:event.target.value
             }
         )
     }
-    changeUpdateGift= (event) => {
-        this.setState(
-            {
-                updateGift:event.target.value
-            }
-        )
-    }
+
 
     render = () => {
-        return <div className="container-fluid">
-
-            <h2>Create Person</h2>
-
-<button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Create festival
-</button>
-
-
-<div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title" id="exampleModalLabel">Create Festivals</h5>
-        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div className="modal-body">
-      <form onSubmit={this.createFestival}>
-      <div className="form-group">
-      <label htmlFor="image">Image</label>
-          <input onChange={this.changeNewImg} required="true" type="text" placeholder="Image link" className="form-control"id="image"/>
-      <label htmlFor="festival">Festival</label>
-          <input onChange={this.changeNewFestival} required="true"type="text" placeholder="festival"className="form-control"id="festival"/>
-      <label htmlFor="festival">Date</label>
-          <input onChange={this.changeNewDate} type="date"className="form-control"id="date"  />
-      <label htmlFor="name">Name</label>
-          <input onChange={this.changeNewName} type="text" placeholder="name"className="form-control"id="name" />
-            <label htmlFor="gift">Gift</label>
-          <input onChange={this.changeNewGift} type="text" placeholder="gift" className="form-control"id="gift"/><br/>
-          <input className="btn btn-primary"type="submit" value="Create Festival" />
-          </div>
-      </form>
-      </div>
-    </div>
-  </div>
-</div>
+        return <div className="container">
+            <form onSubmit={this.createPost}>
+            <div className="row">
+             <div className="col-8">
+             <label htmlFor="festival">Description</label>
+                 <input onChange={this.changeNewTitle}  type="text" className="form-control"id="festival"/>
+                 </div>
+                <div className="col-3">
+                <label htmlFor="image">Image</label>
+                    <input onChange={this.changeNewImg} type="text" placeholder="Image link" className="form-control"id="image"/>
+                </div>
+                </div>
+                <div className="row">
+                  <div className="col-4">
+                <input onChange={this.changeNewDate} type="date"id="date"  />
+                   </div>
+                   <div className="col-4">
+            <label htmlFor="name">likes</label>
+                <input onChange={this.changeNewLikes} type="number" placeholder="likes"id="name" />
+                 </div>
+                <input className="btn btn-primary"type="submit" value="Add Post" />
+                </div>
+            </form>
 
             <h2>List of Festival</h2>
     <ul>
         {
-            this.state.occasion.map(
-                (celebrate, index) => {
+            this.state.blog.map(
+                (post, index) => {
                     return <li key={index}>
 
-                      <img src={celebrate.img} alt=""/>  : {celebrate.festival}<br/>
-                      {celebrate.date}<br/>
-                      {celebrate.name}{celebrate.gift}
+                      <img src={post.img} alt=""/>  : {post.titles}<br/>
+                      {post.date}<br/>
+                      {post.likes}
 
-                        <button value={celebrate.id} onClick={this.deleteFestival}>DELETE</button>
+                        <button value={post.id} onClick={this.deleteFestival}>DELETE</button>
 
-                        <form id={celebrate.id} onSubmit={this.updateFestival}>
+                        <form id={post.id} onSubmit={this.updateFestival}>
                             <input onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
-                            <input onChange={this.changeUpdateFestival} type="text" placeholder="name"/><br/>
+                            <input onChange={this.changeUpdateTitles} type="text" placeholder="name"/><br/>
                             <input onChange={this.changeUpdateDate} type="date" /><br/>
-                            <input onChange={this.changeUpdateName} type="text" placeholder="person name"/><br/>
-                            <input onChange={this.changeUpdateGift} type="text" placeholder="gift"/><br/>
-                            <input type="submit" value="Update Event"/>
+                            <input onChange={this.changeUpdateLikes} type="number" placeholder="person name"/><br/>
+                            <input type="submit" value="Update Post"/>
                         </form>
                     </li>
                 }

@@ -9,7 +9,7 @@ app.use(express.static('public'))
 
 
 const peopleController = require('./controllers/festival.js');
-app.use('/festival', peopleController);
+app.use('/blog', peopleController);
 
 postgres.connect();
 
