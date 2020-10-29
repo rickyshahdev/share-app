@@ -136,14 +136,14 @@ class App extends React.Component {
         {
             this.state.blog.map(
                 (post, index) => {
-                    return <div className="col-8" key={index}>
+                    return <div className="col-12 text-center" key={index}>
                       <p>{post.title}</p>
-                      <img className="d-flex justify-content-center"src={post.img} alt="" height="400" width="600"/>  : {post.titles}<br/>
+                      <img src={post.img} alt="" height="500" width="600"/>  : {post.titles}<br/>
                       {post.date}<br/>
-                      <button type="button" className="btn btn-primary"onChange={this.changeNewLikes}>like</button>
+                      <button type="button" className="like btn btn-primary"onChange={this.changeNewLikes}>like</button>
 
 
-        <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" className="edit btn btn-primary" data-toggle="modal" data-target="#exampleModal">
          Edit
         </button>
         <div className="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
