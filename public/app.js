@@ -21,8 +21,7 @@ class App extends React.Component {
             {
                 img:this.state.newImg,
                 title:this.state.newTitle,
-                date:this.state.newDate,
-                likes:this.state.newLikes
+                description: this.state.newDescription
             }
         ).then(
             (response) => {
@@ -43,15 +42,9 @@ class App extends React.Component {
             newTitle:event.target.value
         });
     }
-    changeNewDate = (event) => {
+    changeNewDescription = (event) => {
         this.setState({
-            newDate:event.target.value
-        });
-    }
-
-    changeNewLikes = (event) => {
-        this.setState({
-            newLikes:event.target.value
+            newDescription:event.target.value
         });
     }
 
@@ -74,8 +67,7 @@ class App extends React.Component {
             {
                 img:this.state.updateImg,
                 title:this.state.updateTitle,
-                date:this.state.updateDate,
-                likes:this.state.updateLikes
+                description:this.state.updateDescription,
             }
         ).then(
             (response) => {
@@ -83,8 +75,7 @@ class App extends React.Component {
                     blog:response.data,
                     img: '',
                     title:'',
-                    date:'',
-                    likes:''
+                    description:''
                 })
             }
         )
@@ -105,31 +96,35 @@ class App extends React.Component {
             }
         )
     }
-    changeUpdateDate= (event) => {
+    changeUpdateDescription = (event) => {
         this.setState(
             {
-                updateDate:event.target.value
+                updateDescription:event.target.value
             }
         )
     }
-    changeUpdateLikes= (event) => {
-        this.setState(
-            {
-                updateLikes:event.target.value
-            }
-        )
-    }
+
 
 
     render = () => {
         return <div className="container">
+
             <form className="form-group"onSubmit={this.createPost}>
-            <textarea onChange={this.changeNewTitle}  type="text" className="form-control" placeholder="What's up??"/>
-            <label htmlFor="image"></label>
+            <div className="row">
+            <div className="col">
+            <input onChange={this.changeNewTitle}  type="text" className="form-control" placeholder="Title"/>
+            </div>
+            <div className = "col">
             <input onChange={this.changeNewImg} type="text" placeholder="Image link" className="form-control"id="image"/><br/>
-            <input onChange={this.changeNewDate}type="date"/>
-            <input onChange={this.changeNewLikes}type="number" min='0'/>
+            </div>
+            </div>
+            <label htmlFor="desc">Description</label>
+            <textarea onChange={this.changeNewDescription} type="text" placeholder="" className="form-control"id="desc"></textarea><br/>
+
+            <div className="col">
             <input className="btn btn-primary btn-lg btn-block"type="submit" value="Add Post" id="button"/>
+            </div>
+
             </form>
 
     <div className="row">
@@ -138,9 +133,8 @@ class App extends React.Component {
                 (post, index) => {
                     return <div className="col-12 text-center" key={index}>
                       <p>{post.title}</p>
-                      <img src={post.img} alt="" height="500" width="600"/>  : {post.titles}<br/>
-                      {post.date}<br/>
-                      <button type="button" className="like btn btn-primary"onChange={this.changeNewLikes}>like</button>
+                      <img src={post.img} alt="" height="500" width="600"/><br/>
+                      {post.description}<br/>
 
 
         <button type="button" className="edit btn btn-primary" data-toggle="modal" data-target="#exampleModal">
