@@ -138,16 +138,17 @@ class App extends React.Component {
 
 
             <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-Edit
- </button>
-              <form className="form-group"id={post.id} onSubmit={this.updatePost}>
+            <button className="btn btn-primary dropdown-toggle " type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit
+            </button>
+               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <form className="form-group px-4 py-3"id={post.id} onSubmit={this.updatePost}>
                   <input className="form-control" onChange={this.changeUpdateTitle} type="text" placeholder="title"/><br/>
                   <input className="form-control" onChange={this.changeUpdateDescription} type="text" placeholder="description"/><br/>
                   <input className="form-control"onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
                   <input type="submit" className="btn btn-primary btn-lg btn-block" value="Update Post"/>
               </form>
                   <button className="btn btn-danger btn-lg btn-block"value={post.id} onClick={this.deletePost}>DELETE</button>
+                  </div>
                 </div>
                 </div>
                 }
