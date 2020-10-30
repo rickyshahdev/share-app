@@ -67,7 +67,7 @@ class App extends React.Component {
             {
                 img:this.state.updateImg,
                 title:this.state.updateTitle,
-                description:this.state.updateDescription,
+                description:this.state.updateDescription
             }
         ).then(
             (response) => {
@@ -89,10 +89,10 @@ class App extends React.Component {
         )
     }
 
-    changeUpdatePost = (event) => {
+    changeUpdateTitle = (event) => {
         this.setState(
             {
-                updatePost:event.target.value
+                updateTitle:event.target.value
             }
         )
     }
@@ -133,41 +133,23 @@ class App extends React.Component {
                 (post, index) => {
                     return <div className="col-12 text-center" key={index}>
                       <p>{post.title}</p>
-                      <img src={post.img} alt="" height="500" width="600"/><br/>
+                      <img src={post.img} height="500" width="600"/><br/>
                       {post.description}<br/>
 
 
-        <button type="button" className="edit btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-         Edit
-        </button>
-        <div className="modal fade" id="exampleModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-
-              <div className="modal-body">
-              <form className="form-group"id={post.id} onSubmit={this.updateFestival}>
-                  <input onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
-                  <input onChange={this.changeUpdateTitles} type="text" placeholder="name"/><br/>
-                  <input onChange={this.changeUpdateDate} type="date" /><br/>
-                  <input onChange={this.changeUpdateLikes} type="number" placeholder="likes"/><br/>
-                  <input type="submit" value="Update Post"/>
+            <div className="dropdown">
+            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+Edit
+ </button>
+              <form className="form-group"id={post.id} onSubmit={this.updatePost}>
+                  <input className="form-control" onChange={this.changeUpdateTitle} type="text" placeholder="title"/><br/>
+                  <input className="form-control" onChange={this.changeUpdateDescription} type="text" placeholder="description"/><br/>
+                  <input className="form-control"onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
+                  <input type="submit" className="btn btn-primary btn-lg btn-block" value="Update Post"/>
               </form>
-                  <button value={post.id} onClick={this.deletePost}>DELETE</button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-
-
-                    </div>
+                  <button className="btn btn-danger btn-lg btn-block"value={post.id} onClick={this.deletePost}>DELETE</button>
+                </div>
+                </div>
                 }
             )
         }
