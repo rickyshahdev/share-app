@@ -4,4 +4,4 @@ INSERT INTO festival (img, festival, date, name, gift) VALUES ('https://www.chil
 
 CREATE TABLE post (id SERIAL, img TEXT NOT NULL, title TEXT NOT NULL, description TEXT NOT NULL);
 
- INSERT INTO post (img, title, date, likes) VALUES ('https://mediad.publicbroadcasting.net/p/wyprmain/files/styles/x_large/public/201901/general_assembly.jpg', 'Best Bootcamp Ever', 'General Assembly is a pioneer in education and career transformation, specializing in today\'s most in-demand skills. The leading source for training, staffing, and career transitions, we foster a flourishing community of professionals pursuing careers they love.');
+ INSERT INTO post (img, title, description) VALUES ('https://mediad.publicbroadcasting.net/p/wyprmain/files/styles/x_large/public/201901/general_assembly.jpg', 'Best Bootcamp Ever', 'General Assembly is a pioneer in education and career transformation, specializing in today\'s most in-demand skills. The leading source for training, staffing, and career transitions, we foster a flourishing community of professionals pursuing careers they love.');

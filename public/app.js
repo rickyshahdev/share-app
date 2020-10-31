@@ -15,7 +15,7 @@ class App extends React.Component {
 
     createPost = (event) => {
 
-        event.preventDefault();
+        // event.preventDefault();
         axios.post(
             '/blog',
             {
