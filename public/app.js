@@ -108,48 +108,53 @@ class App extends React.Component {
 
     render = () => {
         return <div className="container">
-
+        <div className="card bg-white" >
+          <div className="card-title ">
+            <div className="media-body">
             <form className="form-group"onSubmit={this.createPost}>
-            <div className="row">
-            <div className="col">
-            <input onChange={this.changeNewTitle}  type="text" className="form-control" placeholder="Title"/>
-            </div>
-            <div className = "col">
-            <input onChange={this.changeNewImg} type="text" placeholder="Image link" className="form-control"id="image"/><br/>
-            </div>
-            </div>
-            <label htmlFor="desc">Description</label>
-            <textarea onChange={this.changeNewDescription} type="text" placeholder="" className="form-control"id="desc"></textarea><br/>
+              <div className="row">
+              <div className="col">
+              <input onChange={this.changeNewTitle}  type="text" className="form-control" placeholder="Title"/>
+              </div>
+              <div className = "col">
+              <input onChange={this.changeNewImg} type="text" placeholder="Image link" className="form-control"id="image"/><br/>
+              </div>
+              </div>
+              <textarea onChange={this.changeNewDescription} type="text" placeholder="" className="form-control text-area"id="desc" placeholder="Description"></textarea><br/>
 
-            <div className="col">
-            <input className="btn btn-primary btn-lg btn-block"type="submit" value="Add Post" id="button"/>
-            </div>
-
+              <div className="col">
+              <input className="btn btn-primary btn-lg btn-block"type="submit" value="Add Post" id="button"/>
+              </div>
             </form>
-
+            </div>
+          </div>
+        </div>
     <div className="row">
         {
             this.state.blog.map(
                 (post, index) => {
-                    return <div className="col-12 text-center" key={index}>
-                      <p>{post.title}</p>
-                      <img src={post.img} height="500" width="600"/><br/>
-                      {post.description}<br/>
+                    return <div className="col-12 text-center card bg-white mt-3" key={index}>
+
+                    <div className="dropdown text-right">
+                    <button className="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                       <div className="dropdown-menu" aria-labelledby="dropdownMenu1">
+                      <form className="form-group px-4 py-3"id={post.id} onSubmit={this.updatePost}>
+                          <input className="form-control" onChange={this.changeUpdateTitle} type="text" placeholder="title"/><br/>
+                          <textarea className="form-control text-area" onChange={this.changeUpdateDescription} type="text" placeholder="description"></textarea><br/>
+                          <input className="form-control"onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
+                          <input type="submit" className="btn btn-primary btn-lg btn-block" value="Update Post"/>
+                          <button className="btn btn-danger btn-block "value={post.id} onClick={this.deletePost}>DELETE</button>
+                      </form>
+
+                          </div>
+                        </div>
+                      <img className="image"src={post.img}  /><br/>
+                      <h5 className="card-title font-italic">{post.title}</h5>
+                      <p>{post.description}</p><br/>
 
 
-            <div className="dropdown">
-            <button className="btn btn-primary dropdown-toggle " type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Edit
-            </button>
-               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-              <form className="form-group px-4 py-3"id={post.id} onSubmit={this.updatePost}>
-                  <input className="form-control" onChange={this.changeUpdateTitle} type="text" placeholder="title"/><br/>
-                  <input className="form-control" onChange={this.changeUpdateDescription} type="text" placeholder="description"/><br/>
-                  <input className="form-control"onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
-                  <input type="submit" className="btn btn-primary btn-lg btn-block" value="Update Post"/>
-              </form>
-                  <button className="btn btn-danger btn-lg btn-block"value={post.id} onClick={this.deletePost}>DELETE</button>
-                  </div>
-                </div>
+
                 </div>
                 }
             )
