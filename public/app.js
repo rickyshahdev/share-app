@@ -114,10 +114,10 @@ class App extends React.Component {
             <form className="form-group"onSubmit={this.createPost}>
               <div className="row">
               <div className="col">
-              <input onChange={this.changeNewTitle}  type="text" className="form-control" placeholder="Title"/>
+              <input onChange={this.changeNewTitle}  required={true} type="text" className="form-control" placeholder="Title"/>
               </div>
               <div className = "col">
-              <input onChange={this.changeNewImg} type="text" placeholder="Image link" className="form-control"id="image"/><br/>
+              <input onChange={this.changeNewImg} required={true} type="text" placeholder="Image link" className="form-control"id="image"/><br/>
               </div>
               </div>
               <textarea onChange={this.changeNewDescription} type="text" placeholder="" className="form-control text-area"id="desc" placeholder="Description"></textarea><br/>
@@ -140,9 +140,9 @@ class App extends React.Component {
                     </button>
                        <div className="dropdown-menu" aria-labelledby="dropdownMenu1">
                       <form className="form-group px-4 py-3"id={post.id} onSubmit={this.updatePost}>
-                          <input className="form-control" onChange={this.changeUpdateTitle} type="text" placeholder="title"/><br/>
+                          <input className="form-control" required={true} onChange={this.changeUpdateTitle} type="text" placeholder="title"/><br/>
                           <textarea className="form-control text-area" onChange={this.changeUpdateDescription} type="text" placeholder="description"></textarea><br/>
-                          <input className="form-control"onChange={this.changeUpdateImg} type="text" placeholder="Image link"/><br/>
+                          <input className="form-control"onChange={this.changeUpdateImg} required={true} type="text" placeholder="Image link"/><br/>
                           <input type="submit" className="btn btn-primary btn-lg btn-block" value="Update Post"/>
                           <button className="btn btn-danger btn-block "value={post.id} onClick={this.deletePost}>DELETE</button>
                       </form>
