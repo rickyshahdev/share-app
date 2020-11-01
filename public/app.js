@@ -108,9 +108,9 @@ class App extends React.Component {
 
     render = () => {
         return <div className="container">
-        <div className="card bg-white" >
-          <div className="card-title ">
-            <div className="media-body">
+        <div className="card bg-info" >
+
+            <div className="card-body">
             <form className="form-group"onSubmit={this.createPost}>
               <div className="row">
               <div className="col">
@@ -128,7 +128,6 @@ class App extends React.Component {
             </form>
             </div>
           </div>
-        </div>
     <div className="row">
         {
             this.state.blog.map(
