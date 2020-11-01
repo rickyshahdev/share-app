@@ -7,7 +7,7 @@ render = () => {
      <h4 className="text-center">Please Register here</h4>
     <div className="card bg-info">
      <div className="card-body">
-    <form className="form-group" action="index.html" onSubmit={this.getPeople}>
+    <form className="form-group" action="index.html">
       <input  className="form-control" required={true}type="text" placeholder="username"/><br/>
       <input  className="form-control"required={true} type="text" placeholder="password"/><br/>
       <input className="btn btn-dark"type="submit" value="Sign up"/>

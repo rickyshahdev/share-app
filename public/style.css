@@ -18,3 +18,7 @@ background-size: cover;
 background-attachment: fixed;
 background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
 }
+
+.card{
+    box-shadow: 2px 2px 4px black;
+}

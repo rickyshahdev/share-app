@@ -120,7 +120,7 @@ class App extends React.Component {
               <input onChange={this.changeNewImg} required={true} type="text" placeholder="Image link" className="form-control"id="image"/><br/>
               </div>
               </div>
-              <textarea onChange={this.changeNewDescription} type="text" placeholder="" className="form-control text-area"id="desc" placeholder="Description"></textarea><br/>
+              <textarea onChange={this.changeNewDescription} required={true}  type="text" placeholder="" className="form-control text-area"id="desc" placeholder="Description"></textarea><br/>
 
               <div className="col">
               <input className="btn btn-primary btn-lg btn-block"type="submit" value="Add Post" id="button"/>
@@ -132,7 +132,7 @@ class App extends React.Component {
         {
             this.state.blog.map(
                 (post, index) => {
-                    return <div className="col-12 text-center card bg-white mt-3" key={index}>
+                    return <div className="col-12 text-center card bg-light mt-3" key={index}>
 
                     <div className="dropdown text-right">
                     <button className="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
